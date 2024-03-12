@@ -1,4 +1,3 @@
-# Import necessary libraries
 import cv2
 import pickle
 import numpy as np
@@ -46,10 +45,10 @@ while True:
         counter += 1
         
         # Draw a rectangle around the detected face
-        cv2.rectangle(frame, (x, y), (x+w, y+h), (50, 50, 255), 1)
+        cv2.rectangle(frame, (x, y), (x+w, y+h), (50, 50, 255), 2)
         
         # Display the count of captured face images
-        cv2.putText(frame, f"Faces Captured: {len(faces)}", (50, 50), cv2.FONT_HERSHEY_SIMPLEX, 1, (50, 50, 255), 1)
+        cv2.putText(frame, f"Faces Captured: {len(faces)}", (50, 50), cv2.FONT_HERSHEY_SIMPLEX, 1, (0, 255, 0), 2)
     
     # Display the frame with face detection
     cv2.imshow("Frame", frame)
@@ -77,3 +76,15 @@ with open('data/names.pkl', 'wb') as f:
 
 with open('data/faces_data.pkl', 'wb') as f:
     pickle.dump(faces, f)
+
+# Check if the files exist
+if os.path.exists('data/names.pkl') and os.path.exists('data/faces_data.pkl'):
+    # Load the names
+    with open('data/names.pkl', 'rb') as f:
+        names = pickle.load(f)
+    
+    # Load the face data
+    with open('data/faces_data.pkl', 'rb') as f:
+        faces = pickle.load(f)
+else:
+    print("No existing data found.")
